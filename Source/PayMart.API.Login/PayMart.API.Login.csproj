@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PayMart.Application.Login\PayMart.Application.Login.csproj" />
     <ProjectReference Include="..\PayMart.Domain.Login\PayMart.Domain.Login.csproj" />
     <ProjectReference Include="..\PayMart.Infrastructure.Login\PayMart.Infrastructure.Login.csproj" />

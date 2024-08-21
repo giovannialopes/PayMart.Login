@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Domain.Login\PayMart.Domain.Login.csproj" />
+  </ItemGroup>
+
 </Project>
