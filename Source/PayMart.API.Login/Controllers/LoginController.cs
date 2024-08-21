@@ -11,6 +11,7 @@ namespace PayMart.API.Login.Controllers;
 public class LoginController : ControllerBase
 {
     [HttpPost]
+    [Route("getUser")]
     public async Task<IActionResult> GetUser(
         [FromServices] IGetUserLoginUseCases useCases,
         [FromBody] RequestGetUserLogin request)
@@ -20,9 +21,10 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
+    [Route("registerUser")]
     public async Task<IActionResult> RegisterUser(
-    [FromServices] IRegisterUserLoginUseCases useCases,
-    [FromBody] RequestRegisterUserLogin request)
+        [FromServices] IRegisterUserLoginUseCases useCases,
+        [FromBody] RequestRegisterUserLogin request)
     {
         var response = await useCases.Execute(request);
         return Ok(response);

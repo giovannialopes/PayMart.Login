@@ -2,4 +2,5 @@
 
 public class ResponseRegisterUserLogin
 {
+    public string Token { get; set; } = "";
 }
