@@ -7,11 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Application.Login\PayMart.Application.Login.csproj" />
+    <ProjectReference Include="..\PayMart.Domain.Login\PayMart.Domain.Login.csproj" />
+    <ProjectReference Include="..\PayMart.Infrastructure.Login\PayMart.Infrastructure.Login.csproj" />
   </ItemGroup>
 
 </Project>
