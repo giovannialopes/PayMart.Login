@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Login.Interface.DataBase;
+using PayMart.Domain.Login.Interface.Login.GetUser;
+using PayMart.Domain.Login.Interface.Login.RegisterUser;
 using PayMart.Infrastructure.Login.DataAcess;
 using PayMart.Infrastructure.Login.Repositories;
 
@@ -17,7 +19,8 @@ public static class DepedencyInjectionInfra
 
     private static void AddRepositories(IServiceCollection services)
     {
-
+        services.AddScoped<IGetUser, LoginRepository>();
+        services.AddScoped<IRegisterUser, LoginRepository>();
     }
 
     private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
