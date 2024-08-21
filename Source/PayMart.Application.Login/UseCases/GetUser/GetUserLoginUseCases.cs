@@ -20,7 +20,7 @@ public class GetUserLoginUseCases : IGetUserLoginUseCases
 
     public async Task<ResponseGetUserLogin> Execute(RequestGetUserLogin request)
     {
-        var response = await _getUser.GetUser();
+        var response = await _getUser.GetUser(request.Email, request.Password);
 
         return _mapper.Map<ResponseGetUserLogin>(response);
     }

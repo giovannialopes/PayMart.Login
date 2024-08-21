@@ -21,7 +21,8 @@ public class LoginRepository:
 
     public Task Commit() => _dbLogin.SaveChangesAsync();
 
-    public async Task<LoginUser?> GetUser() => await _dbLogin.Tb_User.AsNoTracking().FirstOrDefaultAsync();
+    public async Task<LoginUser?> GetUser(string email, string password) => await _dbLogin.Tb_User.AsNoTracking().
+        FirstOrDefaultAsync(config => config.Email == email && config.Password == password);
 
 
     public async Task RegisterUser(LoginUser login) => await _dbLogin.Tb_User.AddAsync(login);
