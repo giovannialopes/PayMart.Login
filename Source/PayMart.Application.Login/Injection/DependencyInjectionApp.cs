@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PayMart.Application.Login.AutoMapper;
+using PayMart.Application.Login.UseCases.Delete;
 using PayMart.Application.Login.UseCases.GetUser;
 using PayMart.Application.Login.UseCases.RegisterUser;
 
@@ -22,5 +23,6 @@ public static class DependencyInjectionApp
     {
         services.AddScoped<IGetUserLoginUseCases, GetUserLoginUseCases>();
         services.AddScoped<IRegisterUserLoginUseCases, RegisterUserLoginUseCases>();
+        services.AddScoped<IDeleteLoginUseCases, DeleteLoginUseCases>();
     }
 }

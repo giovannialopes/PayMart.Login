@@ -4,13 +4,15 @@ using PayMart.Domain.Login.Interface.Login.GetUser;
 using PayMart.Domain.Login.Interface.Login.RegisterUser;
 using PayMart.Domain.Login.Entities;
 using Microsoft.EntityFrameworkCore;
+using PayMart.Domain.Login.Interface.Login.Delete;
 
 namespace PayMart.Infrastructure.Login.Repositories;
 
 public class LoginRepository:
     ICommit,
     IGetUser,
-    IRegisterUser
+    IRegisterUser,
+    IDelete
 {
     private readonly DbLogin _dbLogin;
 
@@ -20,6 +22,17 @@ public class LoginRepository:
     }
 
     public Task Commit() => _dbLogin.SaveChangesAsync();
+
+    public async Task Delete(int id)
+    {
+        var result = await _dbLogin.Tb_User.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id && config.Enabled == 1);
+        if (result != null)
+        {
+            result.Enabled = 0;
+            _dbLogin.Tb_User.Update(result);
+        }
+
+    }
 
     public async Task<LoginUser?> GetUser(string email, string password) => await _dbLogin.Tb_User.AsNoTracking().
         FirstOrDefaultAsync(config => config.Email == email && config.Password == password);

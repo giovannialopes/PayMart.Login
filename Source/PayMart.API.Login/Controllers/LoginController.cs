@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Application.Login.UseCases.Delete;
 using PayMart.Application.Login.UseCases.GetUser;
 using PayMart.Application.Login.UseCases.RegisterUser;
 using PayMart.Domain.Login.Request.GetUser;
@@ -39,4 +40,12 @@ public class LoginController : ControllerBase
     }
 
 
+    [HttpDelete]
+    [Route("delete/{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id,
+    [FromServices] IDeleteLoginUseCases useCase)
+    {
+        await useCase.Execute(id);
+        return Ok();
+    }
 }
