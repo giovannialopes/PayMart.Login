@@ -1,4 +1,6 @@
-﻿namespace PayMart.Domain.Login.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace PayMart.Domain.Login.Entities;
 
 public class LoginUser
 {
@@ -6,5 +8,8 @@ public class LoginUser
     public string Name { get; set; } = "";
     public string Password { get; set; } = "";
     public string Email { get; set; } = "";
+
+    [JsonIgnore]
+    public int Enabled { get; set; } = 1;
 
 }

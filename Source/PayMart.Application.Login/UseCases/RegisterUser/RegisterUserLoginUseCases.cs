@@ -13,18 +13,21 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
 
     private readonly IMapper _mapper;
     private readonly IRegisterUser _getRegister;
+    private readonly IGetUser _getUser;
     private readonly ICommit _commit;
 
     public RegisterUserLoginUseCases(IMapper mapper,
-        IRegisterUser getUser,
+        IRegisterUser getRegister,
+        IGetUser getUser,
         ICommit commit)
     {
         _mapper = mapper;
-        _getRegister = getUser;
+        _getRegister = getRegister;
+        _getUser = getUser;
         _commit = commit;
     }
 
-    public async Task<string> Execute(RequestRegisterUserLogin request)
+    public async Task<ResponseRegisterUserLogin> Execute(RequestRegisterUserLogin request)
     {
         var response = _mapper.Map<LoginUser>(request);
 
@@ -32,6 +35,8 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
 
         await _commit.Commit();
 
-        return "Login criado com sucesso";
+        var userID = await _getUser.GetUser(response.Email, response.Password);
+
+        return _mapper.Map<ResponseRegisterUserLogin>(userID);
     }
 }
