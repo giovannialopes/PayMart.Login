@@ -24,7 +24,7 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
         _commit = commit;
     }
 
-    public async Task<ResponseRegisterUserLogin> Execute(RequestRegisterUserLogin request)
+    public async Task<string> Execute(RequestRegisterUserLogin request)
     {
         var response = _mapper.Map<LoginUser>(request);
 
@@ -32,6 +32,6 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
 
         await _commit.Commit();
 
-        return _mapper.Map<ResponseRegisterUserLogin>(response);    
+        return "Login criado com sucesso";
     }
 }

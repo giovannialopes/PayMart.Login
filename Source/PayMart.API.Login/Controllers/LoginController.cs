@@ -17,6 +17,10 @@ public class LoginController : ControllerBase
     [FromBody] RequestRegisterUserLogin request)
     {
         var response = await useCases.Execute(request);
+        if (response == null)
+        {
+            return BadRequest();
+        }
         return Ok(response);
     }
 
@@ -27,6 +31,10 @@ public class LoginController : ControllerBase
         [FromBody] RequestGetUserLogin request)
     {
         var response = await useCases.Execute(request);
+        if (response == null)
+        {
+            return BadRequest();
+        }
         return Ok(response);
     }
 

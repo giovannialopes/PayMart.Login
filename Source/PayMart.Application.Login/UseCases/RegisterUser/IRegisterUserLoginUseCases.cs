@@ -5,5 +5,5 @@ namespace PayMart.Application.Login.UseCases.RegisterUser;
 
 public interface IRegisterUserLoginUseCases
 {
-    Task<ResponseRegisterUserLogin> Execute(RequestRegisterUserLogin request);
+    Task<string> Execute(RequestRegisterUserLogin request);
 }
