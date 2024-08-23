@@ -24,11 +24,15 @@ public class AutoMapping : Profile
 
     private void EntityToResponse()
     {
+        CreateMap<LoginUser, ResponseGetUserLogin>();
         CreateMap<string, ResponseGetUserLogin>()
             .ForMember(dest => dest.Token, opt => opt.MapFrom(src => src));
 
-        CreateMap<LoginUser, ResponseGetUserLogin>();
+
+
         CreateMap<LoginUser, ResponseRegisterUserLogin>();
+        CreateMap<string, ResponseRegisterUserLogin>()
+            .ForMember(dest => dest.Token, opt => opt.MapFrom(src => src));
     }
 
 }

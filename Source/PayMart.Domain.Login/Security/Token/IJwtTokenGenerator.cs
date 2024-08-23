@@ -4,5 +4,5 @@ namespace PayMart.Domain.Login.Security.Token;
 
 public interface IJwtTokenGenerator
 {
-    string Generator(LoginUser user);
+    string Generator(LoginUser user, string request = null);
 }

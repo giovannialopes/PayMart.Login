@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Azure.Core;
+using Microsoft.IdentityModel.Tokens;
 using PayMart.Domain.Login.Entities;
 using PayMart.Domain.Login.Security.Token;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,10 +19,12 @@ public class JwtAcessToken : IJwtTokenGenerator
         _signingKey = signingKey;
     }
 
-    public string Generator(LoginUser user)
+    public string Generator(LoginUser user, string request)
     {
         var claims = new List<Claim>()
         {
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 
