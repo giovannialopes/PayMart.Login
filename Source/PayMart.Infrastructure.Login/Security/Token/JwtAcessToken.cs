@@ -22,7 +22,6 @@ public class JwtAcessToken : IJwtTokenGenerator
     {
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 
@@ -45,4 +44,6 @@ public class JwtAcessToken : IJwtTokenGenerator
 
         return new SymmetricSecurityKey(key);
     }
+
+
 }
