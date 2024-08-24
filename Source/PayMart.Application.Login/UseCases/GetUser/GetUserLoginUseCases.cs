@@ -29,7 +29,7 @@ public class GetUserLoginUseCases : IGetUserLoginUseCases
     {
         var verifyEmail = await _emailRepository.VerifyEmail(request.Email);
 
-        if (verifyEmail != true)
+        if (verifyEmail != false)
         {
             var response = await _loginRepository.GetUser(request.Email, request.Password);
             var results = _jwtTokenGenerator.Generator(response!);
