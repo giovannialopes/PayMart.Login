@@ -1,43 +1,25 @@
-﻿using PayMart.Infrastructure.Login.DataAcess;
-using PayMart.Domain.Login.Interface.DataBase;
-using PayMart.Domain.Login.Interface.Login.GetUser;
-using PayMart.Domain.Login.Interface.Login.RegisterUser;
+﻿using Microsoft.EntityFrameworkCore;
 using PayMart.Domain.Login.Entities;
-using Microsoft.EntityFrameworkCore;
-using PayMart.Domain.Login.Interface.Login.Delete;
+using PayMart.Domain.Login.Interface.Repositories;
+using PayMart.Infrastructure.Login.DataAcess;
 
 namespace PayMart.Infrastructure.Login.Repositories;
 
-public class LoginRepository:
-    ICommit,
-    IGetUser,
-    IRegisterUser,
-    IDelete
+public class LoginRepository : ILoginRepository
 {
     private readonly DbLogin _dbLogin;
-
-    public LoginRepository(DbLogin dbLogin)
-    {
-        _dbLogin = dbLogin;
-    }
+    public LoginRepository(DbLogin dbLogin) => _dbLogin = dbLogin;
 
     public Task Commit() => _dbLogin.SaveChangesAsync();
 
-    public async Task Delete(int id)
-    {
-        var result = await _dbLogin.Tb_User.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id && config.Enabled == 1);
-        if (result != null)
-        {
-            result.Enabled = 0;
-            _dbLogin.Tb_User.Update(result);
-        }
-
-    }
-
-    public async Task<LoginUser?> GetUser(string email, string password) => await _dbLogin.Tb_User.AsNoTracking().
+    public Task<LoginUser?> GetUser(string email, string password) => _dbLogin.Tb_User.AsNoTracking().
         FirstOrDefaultAsync(config => config.Email == email && config.Password == password);
 
+    public void RegisterUser(LoginUser login) => _dbLogin.Tb_User.AddAsync(login);
 
-    public async Task RegisterUser(LoginUser login) => await _dbLogin.Tb_User.AddAsync(login);
+    public Task<LoginUser?> VerifyUserEnabled(int id) => _dbLogin.Tb_User.AsNoTracking().
+        FirstOrDefaultAsync(config => config.Id == id && config.Enabled == 1);
+
+    public void DeleteUser(LoginUser user) => _dbLogin.Tb_User.Update(user);
 
 }

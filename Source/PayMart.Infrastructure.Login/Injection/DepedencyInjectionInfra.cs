@@ -2,9 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Login.Interface.DataBase;
-using PayMart.Domain.Login.Interface.Login.Delete;
-using PayMart.Domain.Login.Interface.Login.GetUser;
-using PayMart.Domain.Login.Interface.Login.RegisterUser;
+using PayMart.Domain.Login.Interface.Repositories;
 using PayMart.Domain.Login.Security.Token;
 using PayMart.Infrastructure.Login.DataAcess;
 using PayMart.Infrastructure.Login.Repositories;
@@ -32,9 +30,8 @@ public static class DepedencyInjectionInfra
 
     private static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<IGetUser, LoginRepository>();
-        services.AddScoped<IRegisterUser, LoginRepository>();
-        services.AddScoped<IDelete, LoginRepository>();
+        services.AddScoped<ILoginRepository, LoginRepository>();
+        services.AddScoped<IEmailRepository, EmailRepository>();
     }
 
     private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
@@ -44,5 +41,4 @@ public static class DepedencyInjectionInfra
         var connectionString = configuration.GetConnectionString("Connection");
         services.AddDbContext<DbLogin>(config => config.UseSqlServer(connectionString));
     }
-
 }

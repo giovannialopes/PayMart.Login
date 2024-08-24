@@ -1,28 +1,28 @@
-﻿using AutoMapper;
-using PayMart.Domain.Login.Interface.DataBase;
-using PayMart.Domain.Login.Interface.Login.Delete;
+﻿using PayMart.Domain.Login.Exception.ResourceExceptions;
+using PayMart.Domain.Login.Interface.Repositories;
 
 namespace PayMart.Application.Login.UseCases.Delete;
 
 public class DeleteLoginUseCases : IDeleteLoginUseCases
 {
-    private readonly IDelete _delete;
-    private readonly ICommit _commit;
-    private readonly IMapper _mapper;
+    private readonly ILoginRepository _loginRepository;
 
-    public DeleteLoginUseCases(IDelete delete,
-        ICommit commit,
-        IMapper mapper)
+    public DeleteLoginUseCases(ILoginRepository loginRepository)
     {
-        _delete = delete;
-        _commit = commit;
-        _mapper = mapper;
+        _loginRepository = loginRepository;
     }
 
-    public async Task Execute(int id)
+    public async Task<string> Execute(int id)
     {
-        await _delete.Delete(id);
+        var verifyUser = await _loginRepository.VerifyUserEnabled(id);
 
-        await _commit.Commit();
+        if (verifyUser == null)
+        {
+            verifyUser!.Enabled = 0;
+            _loginRepository.DeleteUser(verifyUser!);
+
+            await _loginRepository.Commit();
+        }
+        return ResourceExceptions.ERRO_DELETE;
     }
 }

@@ -1,6 +1,6 @@
+using PayMart.Application.Login.Injection;
 using PayMart.Infrastructure.Login.Injection;
 using PayMart.Infrastructure.Login.Migrations;
-using PayMart.Application.Login.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

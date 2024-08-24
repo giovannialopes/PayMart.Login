@@ -12,38 +12,37 @@ namespace PayMart.API.Login.Controllers;
 public class LoginController : ControllerBase
 {
     [HttpPost]
-    [Route("registerUser")]
-    public async Task<IActionResult> RegisterUser(
-    [FromServices] IRegisterUserLoginUseCases useCases,
-    [FromBody] RequestRegisterUserLogin request)
-    {
-        var response = await useCases.Execute(request);
-        if (response == null)
-        {
-            return BadRequest();
-        }
-        return Ok(response);
-    }
-
-    [HttpPost]
     [Route("getUser")]
     public async Task<IActionResult> GetUser(
         [FromServices] IGetUserLoginUseCases useCases,
         [FromBody] RequestGetUserLogin request)
     {
         var response = await useCases.Execute(request);
-        if (response == null)
+        if (response == null || response.Exception != "")
         {
-            return BadRequest();
+            return BadRequest(response!.Exception);
         }
         return Ok(response);
     }
 
+    [HttpPost]
+    [Route("registerUser")]
+    public async Task<IActionResult> RegisterUser(
+        [FromServices] IRegisterUserLoginUseCases useCases,
+        [FromBody] RequestRegisterUserLogin request)
+    {
+        var response = await useCases.Execute(request);
+        if (response == null || response.Exception != "")
+        {
+            return BadRequest(response!.Exception);
+        }
+        return Ok(response);
+    }
 
     [HttpDelete]
     [Route("delete/{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id,
-    [FromServices] IDeleteLoginUseCases useCase)
+        [FromServices] IDeleteLoginUseCases useCase)
     {
         await useCase.Execute(id);
         return Ok();

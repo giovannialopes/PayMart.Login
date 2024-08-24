@@ -1,35 +1,42 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Login.Interface.Login.GetUser;
+using PayMart.Domain.Login.Exception.ResourceExceptions;
+using PayMart.Domain.Login.Interface.Repositories;
 using PayMart.Domain.Login.Request.GetUser;
 using PayMart.Domain.Login.Response.GetUser;
 using PayMart.Domain.Login.Security.Token;
-using System.Text;
 
 namespace PayMart.Application.Login.UseCases.GetUser;
 
 public class GetUserLoginUseCases : IGetUserLoginUseCases
 {
     private readonly IMapper _mapper;
-    private readonly IGetUser _getUser;
+    private readonly ILoginRepository _loginRepository;
+    private readonly IEmailRepository _emailRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-
     public GetUserLoginUseCases(IMapper mapper,
-        IGetUser getUser,
+        ILoginRepository loginRepository,
+        IEmailRepository emailRepository,
         IJwtTokenGenerator jwtTokenGenerator)
     {
         _mapper = mapper;
-        _getUser = getUser;
+        _loginRepository = loginRepository;
+        _emailRepository = emailRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
     public async Task<ResponseGetUserLogin> Execute(RequestGetUserLogin request)
     {
-        var response = await _getUser.GetUser(request.Email, request.Password);
-        var results = _jwtTokenGenerator.Generator(response);
+        var verifyEmail = await _emailRepository.VerifyEmail(request.Email);
 
-        return _mapper.Map<ResponseGetUserLogin>(results);
+        if (verifyEmail != true)
+        {
+            var response = await _loginRepository.GetUser(request.Email, request.Password);
+            var results = _jwtTokenGenerator.Generator(response!);
+
+            return _mapper.Map<ResponseGetUserLogin>(results);
+        }
+        return new ResponseGetUserLogin() { Exception = ResourceExceptions.ERRO_EMAIL_REGISTRADO };
+
     }
-
-
 }

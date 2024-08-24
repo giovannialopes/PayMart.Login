@@ -2,6 +2,6 @@
 
 public interface IDeleteLoginUseCases
 {
-    Task Execute(int id);
+    Task<string> Execute(int id);
 
 }

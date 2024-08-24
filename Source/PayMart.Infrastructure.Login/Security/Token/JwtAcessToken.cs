@@ -48,5 +48,4 @@ public class JwtAcessToken : IJwtTokenGenerator
         return new SymmetricSecurityKey(key);
     }
 
-
 }
