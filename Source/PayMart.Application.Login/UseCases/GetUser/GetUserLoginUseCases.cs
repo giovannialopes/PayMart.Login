@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Login.Exception.ResourceExceptions;
 using PayMart.Domain.Login.Interface.Repositories;
 using PayMart.Domain.Login.Request.GetUser;
 using PayMart.Domain.Login.Response.GetUser;
@@ -25,7 +24,7 @@ public class GetUserLoginUseCases : IGetUserLoginUseCases
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    public async Task<ResponseGetUserLogin> Execute(RequestGetUserLogin request)
+    public async Task<ResponseGetUserLogin?> Execute(RequestGetUserLogin request)
     {
         var verifyEmail = await _emailRepository.VerifyEmail(request.Email);
 
@@ -36,7 +35,7 @@ public class GetUserLoginUseCases : IGetUserLoginUseCases
 
             return _mapper.Map<ResponseGetUserLogin>(results);
         }
-        return new ResponseGetUserLogin() { Exception = ResourceExceptions.ERRO_EMAIL_REGISTRADO };
+        return null;
 
     }
 }

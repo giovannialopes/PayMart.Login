@@ -18,10 +18,9 @@ public class LoginController : ControllerBase
         [FromBody] RequestGetUserLogin request)
     {
         var response = await useCases.Execute(request);
-        if (response == null || response.Exception != "")
-        {
-            return BadRequest(response!.Exception);
-        }
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -32,10 +31,9 @@ public class LoginController : ControllerBase
         [FromBody] RequestRegisterUserLogin request)
     {
         var response = await useCases.Execute(request);
-        if (response == null || response.Exception != "")
-        {
-            return BadRequest(response!.Exception);
-        }
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -44,7 +42,10 @@ public class LoginController : ControllerBase
     public async Task<IActionResult> Delete([FromRoute] int id,
         [FromServices] IDeleteLoginUseCases useCase)
     {
-        await useCase.Execute(id);
-        return Ok();
+        var response = await useCase.Execute(id);
+        if (response == null)
+            return Ok("");
+
+        return Ok(response);
     }
 }

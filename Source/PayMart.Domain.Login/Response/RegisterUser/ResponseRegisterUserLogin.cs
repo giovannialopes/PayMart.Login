@@ -5,5 +5,4 @@ namespace PayMart.Domain.Login.Response.RegisterUser;
 public class ResponseRegisterUserLogin
 {
     public string Token { get; set; } = "";
-    public string Exception { get; set; } = "";
 }

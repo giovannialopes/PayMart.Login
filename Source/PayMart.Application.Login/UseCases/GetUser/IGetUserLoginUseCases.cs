@@ -5,5 +5,5 @@ namespace PayMart.Application.Login.UseCases.GetUser;
 
 public interface IGetUserLoginUseCases
 {
-    Task<ResponseGetUserLogin> Execute(RequestGetUserLogin request);
+    Task<ResponseGetUserLogin?> Execute(RequestGetUserLogin request);
 }

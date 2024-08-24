@@ -13,6 +13,6 @@ public class EmailRepository: IEmailRepository
     public async Task Commit() => await _dbLogin.SaveChangesAsync();
 
     public async Task<bool?> VerifyEmail(string email) => await _dbLogin.Tb_User.AsNoTracking()
-        .AnyAsync(config => config.Email == email);
+        .AnyAsync(config => config.Email == email && config.Enabled == 1);
 
 }

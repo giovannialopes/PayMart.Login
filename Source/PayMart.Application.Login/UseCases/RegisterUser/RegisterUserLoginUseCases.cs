@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using PayMart.Domain.Login.Entities;
-using PayMart.Domain.Login.Exception.ResourceExceptions;
 using PayMart.Domain.Login.Interface.Repositories;
 using PayMart.Domain.Login.Request.RegisterUser;
 using PayMart.Domain.Login.Response.RegisterUser;
 using PayMart.Domain.Login.Security.Token;
-using System.Net;
 
 namespace PayMart.Application.Login.UseCases.RegisterUser;
 
@@ -28,7 +26,7 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    public async Task<ResponseRegisterUserLogin> Execute(RequestRegisterUserLogin request)
+    public async Task<ResponseRegisterUserLogin?> Execute(RequestRegisterUserLogin request)
     {
         if (request.Email.Contains("@") && !string.IsNullOrEmpty(request.Email))
         {
@@ -47,8 +45,8 @@ public class RegisterUserLoginUseCases : IRegisterUserLoginUseCases
 
                 return _mapper.Map<ResponseRegisterUserLogin>(returns);
             }
-            return new ResponseRegisterUserLogin() { Exception = ResourceExceptions.ERRO_EMAIL_REGISTRADO };
+            return null;
         }
-        return new ResponseRegisterUserLogin() { Exception = ResourceExceptions.ERRO_EMAIL_INVALIDO };
+        return null;
     }
 }

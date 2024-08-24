@@ -1,5 +1,4 @@
-﻿using PayMart.Domain.Login.Exception.ResourceExceptions;
-using PayMart.Domain.Login.Interface.Repositories;
+﻿using PayMart.Domain.Login.Interface.Repositories;
 
 namespace PayMart.Application.Login.UseCases.Delete;
 
@@ -12,17 +11,20 @@ public class DeleteLoginUseCases : IDeleteLoginUseCases
         _loginRepository = loginRepository;
     }
 
-    public async Task<string> Execute(int id)
+    public async Task<string?> Execute(int id)
     {
         var verifyUser = await _loginRepository.VerifyUserEnabled(id);
 
-        if (verifyUser == null)
+        if (verifyUser != null)
         {
             verifyUser!.Enabled = 0;
             _loginRepository.DeleteUser(verifyUser!);
 
             await _loginRepository.Commit();
+
+            return "Delete";
         }
-        return ResourceExceptions.ERRO_DELETE;
+
+        return null;
     }
 }
