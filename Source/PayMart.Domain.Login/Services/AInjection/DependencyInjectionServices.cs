@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PayMart.Application.Login.AutoMapper;
 using PayMart.Application.Login.UseCases.Delete;
 using PayMart.Application.Login.UseCases.GetUser;
 using PayMart.Application.Login.UseCases.RegisterUser;
+using PayMart.Domain.Login.AutoMapper;
 
-namespace PayMart.Application.Login.Injection;
+namespace PayMart.Domain.Login.Services.AInjection;
 
-public static class DependencyInjectionApp
+public static class DependencyInjectionServices
 {
-    public static void AddApplication(this IServiceCollection services)
+    public static void AddServices(this IServiceCollection services)
     {
         AddRepositories(services);
         AutoMapper(services);

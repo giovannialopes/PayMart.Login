@@ -5,5 +5,5 @@ namespace PayMart.Domain.Login.Interface.Repositories;
 
 public interface IEmailRepository : ICommit
 {
-    Task<bool?> VerifyEmail(string email);
+    Task<LoginUser?> VerifyEmail(string email);
 }

@@ -13,12 +13,12 @@ public class LoginRepository : ILoginRepository
     public Task Commit() => _dbLogin.SaveChangesAsync();
 
     public Task<LoginUser?> GetUser(string email, string password) => _dbLogin.Tb_User.AsNoTracking().
-        FirstOrDefaultAsync(config => config.Email == email && config.Password == password);
+        FirstOrDefaultAsync(config => config.Email == email && config.PasswordHash == password);
 
     public void RegisterUser(LoginUser login) => _dbLogin.Tb_User.AddAsync(login);
 
     public Task<LoginUser?> VerifyUserEnabled(int id) => _dbLogin.Tb_User.AsNoTracking().
-        FirstOrDefaultAsync(config => config.Id == id && config.Enabled == 1);
+        FirstOrDefaultAsync(config => config.Id == id && config.IsEnabled == true);
 
     public void DeleteUser(LoginUser user) => _dbLogin.Tb_User.Update(user);
 

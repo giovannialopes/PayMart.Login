@@ -8,29 +8,20 @@ using System.Text;
 
 namespace PayMart.Infrastructure.Login.Security.Token;
 
-public class JwtAcessToken : IJwtTokenGenerator
+public class JwtAcessToken(uint expirationTimeToken, string signingKey) : IJwtTokenGenerator
 {
-    private readonly uint _expirationTimeToken;
-    private readonly string _signingKey;
-
-    public JwtAcessToken(uint expirationTimeToken, string signingKey)
-    {
-        _expirationTimeToken = expirationTimeToken;
-        _signingKey = signingKey;
-    }
-
     public string Generator(LoginUser user, string request)
     {
         var claims = new List<Claim>()
         {
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Expires = DateTime.UtcNow.AddMinutes(_expirationTimeToken),
+            Expires = DateTime.UtcNow.AddMinutes(expirationTimeToken),
             SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature),
             Subject = new ClaimsIdentity(claims)
         };
@@ -43,7 +34,7 @@ public class JwtAcessToken : IJwtTokenGenerator
 
     private SymmetricSecurityKey SecurityKey()
     {
-        var key = Encoding.UTF8.GetBytes(_signingKey);
+        var key = Encoding.UTF8.GetBytes(signingKey);
 
         return new SymmetricSecurityKey(key);
     }

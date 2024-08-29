@@ -3,9 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Login.Interface.DataBase;
 using PayMart.Domain.Login.Interface.Repositories;
+using PayMart.Domain.Login.Security.Cryptography;
 using PayMart.Domain.Login.Security.Token;
 using PayMart.Infrastructure.Login.DataAcess;
 using PayMart.Infrastructure.Login.Repositories;
+using PayMart.Infrastructure.Login.Security.Cryptography;
 using PayMart.Infrastructure.Login.Security.Token;
 
 namespace PayMart.Infrastructure.Login.Injection;
@@ -32,6 +34,7 @@ public static class DepedencyInjectionInfra
     {
         services.AddScoped<ILoginRepository, LoginRepository>();
         services.AddScoped<IEmailRepository, EmailRepository>();
+        services.AddScoped<IPasswordEncrypted, BCryptography>();
     }
 
     private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)

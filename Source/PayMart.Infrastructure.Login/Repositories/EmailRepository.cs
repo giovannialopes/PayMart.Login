@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PayMart.Domain.Login.Entities;
 using PayMart.Domain.Login.Interface.Repositories;
 using PayMart.Infrastructure.Login.DataAcess;
 
@@ -12,7 +13,7 @@ public class EmailRepository: IEmailRepository
 
     public async Task Commit() => await _dbLogin.SaveChangesAsync();
 
-    public async Task<bool?> VerifyEmail(string email) => await _dbLogin.Tb_User.AsNoTracking()
-        .AnyAsync(config => config.Email == email && config.Enabled == 1);
+    public async Task<LoginUser?> VerifyEmail(string email) => await _dbLogin.Tb_User.AsNoTracking()
+        .FirstOrDefaultAsync(config => config.Email == email && config.IsEnabled == true);
 
 }

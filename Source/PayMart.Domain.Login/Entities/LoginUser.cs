@@ -1,14 +1,11 @@
-﻿using System.Text.Json.Serialization;
-
-namespace PayMart.Domain.Login.Entities;
+﻿namespace PayMart.Domain.Login.Entities;
 
 public class LoginUser
 {
     public int Id { get; set; }
-    public string Name { get; set; } = "";
-    public string Password { get; set; } = "";
-    public string Email { get; set; } = "";
-    public int Enabled { get; set; } = 1;
-
-
+    public string Username { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public bool IsEnabled { get; set; } = true;
+    public DateTime CreatedDate { get; set; } = DateTime.Now;
 }
