@@ -2,7 +2,7 @@
 
 namespace PayMart.Application.Login.UseCases.RegisterUser;
 
-public interface IRegisterUserLoginUseCases
+public interface IRegisterUserLogin
 {
     Task<string?> Execute(RegisterLoginRequest request);
 }

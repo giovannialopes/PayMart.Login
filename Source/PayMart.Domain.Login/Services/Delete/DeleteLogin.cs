@@ -2,7 +2,7 @@
 
 namespace PayMart.Application.Login.UseCases.Delete;
 
-public class DeleteLoginUseCases(ILoginRepository loginRepository) : IDeleteLoginUseCases
+public class DeleteLogin(ILoginRepository loginRepository) : IDeleteLogin
 {
 
     public async Task<string?> Execute(int id)

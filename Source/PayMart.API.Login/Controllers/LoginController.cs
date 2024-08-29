@@ -13,7 +13,7 @@ public class LoginController : ControllerBase
     [HttpPost]
     [Route("getUser")]
     public async Task<IActionResult> GetUser(
-        [FromServices] IGetUserLoginUseCases services,
+        [FromServices] IGetUserLogin services,
         [FromBody] ModelLogin.LoginRequest request)
     {
         var response = await services.Execute(request);
@@ -26,7 +26,7 @@ public class LoginController : ControllerBase
     [HttpPost]
     [Route("registerUser")]
     public async Task<IActionResult> RegisterUser(
-        [FromServices] IRegisterUserLoginUseCases services,
+        [FromServices] IRegisterUserLogin services,
         [FromBody] ModelLogin.RegisterLoginRequest request)
     {
         var response = await services.Execute(request);
@@ -39,7 +39,7 @@ public class LoginController : ControllerBase
     [HttpDelete]
     [Route("delete/{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id,
-        [FromServices] IDeleteLoginUseCases services)
+        [FromServices] IDeleteLogin services)
     {
         var response = await services.Execute(id);
         if (response == null)

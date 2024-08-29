@@ -21,8 +21,8 @@ public static class DependencyInjectionServices
 
     private static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<IGetUserLoginUseCases, GetUserLoginUseCases>();
-        services.AddScoped<IRegisterUserLoginUseCases, RegisterUserLoginUseCases>();
-        services.AddScoped<IDeleteLoginUseCases, DeleteLoginUseCases>();
+        services.AddScoped<IGetUserLogin, GetUserLogin>();
+        services.AddScoped<IRegisterUserLogin, RegisterUserLogin>();
+        services.AddScoped<IDeleteLogin, DeleteLogin>();
     }
 }

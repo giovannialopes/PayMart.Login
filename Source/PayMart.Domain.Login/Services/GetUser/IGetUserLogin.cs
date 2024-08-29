@@ -2,7 +2,7 @@
 
 namespace PayMart.Application.Login.UseCases.GetUser;
 
-public interface IGetUserLoginUseCases
+public interface IGetUserLogin
 {
     Task<LoginResponse?> Execute(LoginRequest request);
 }

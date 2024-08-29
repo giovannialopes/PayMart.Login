@@ -6,11 +6,11 @@ using PayMart.Domain.Login.Security.Token;
 
 namespace PayMart.Application.Login.UseCases.GetUser;
 
-public class GetUserLoginUseCases(IMapper mapper,
+public class GetUserLogin(IMapper mapper,
     ILoginRepository loginRepository,
     IEmailRepository emailRepository,
     IJwtTokenGenerator jwtTokenGenerator,
-    IPasswordEncrypted passwordEncrypted) : IGetUserLoginUseCases
+    IPasswordEncrypted passwordEncrypted) : IGetUserLogin
 {
 
     public async Task<ModelLogin.LoginResponse?> Execute(ModelLogin.LoginRequest request)

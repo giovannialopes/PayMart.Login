@@ -6,10 +6,10 @@ using PayMart.Domain.Login.Security.Cryptography;
 
 namespace PayMart.Application.Login.UseCases.RegisterUser;
 
-public class RegisterUserLoginUseCases(IMapper mapper,
+public class RegisterUserLogin(IMapper mapper,
     ILoginRepository loginRepository,
     IEmailRepository emailRepository,
-    IPasswordEncrypted encryptedPassword) : IRegisterUserLoginUseCases
+    IPasswordEncrypted encryptedPassword) : IRegisterUserLogin
 
 {
     public async Task<string?> Execute(ModelLogin.RegisterLoginRequest request)
