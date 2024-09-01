@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Application.Login.UseCases.Delete;
-using PayMart.Application.Login.UseCases.GetUser;
-using PayMart.Application.Login.UseCases.RegisterUser;
+using PayMart.Domain.Login.Exceptions;
 using PayMart.Domain.Login.ModelView;
+using PayMart.Domain.Login.Services;
 
 namespace PayMart.API.Login.Controllers;
 
@@ -13,12 +12,12 @@ public class LoginController : ControllerBase
     [HttpPost]
     [Route("getUser")]
     public async Task<IActionResult> GetUser(
-        [FromServices] IGetUserLogin services,
+        [FromServices] ILoginServices services,
         [FromBody] ModelLogin.LoginRequest request)
     {
-        var response = await services.Execute(request);
+        var response = await services.GetUserLogin(request);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceException.ERRO_USUARIO_NAO_ENCONTRADO);
 
         return Ok(response);
     }
@@ -26,24 +25,25 @@ public class LoginController : ControllerBase
     [HttpPost]
     [Route("registerUser")]
     public async Task<IActionResult> RegisterUser(
-        [FromServices] IRegisterUserLogin services,
+        [FromServices] ILoginServices services,
         [FromBody] ModelLogin.RegisterLoginRequest request)
     {
-        var response = await services.Execute(request);
+        var response = await services.RegisterUserLogin(request);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceException.ERRO_EMAIL_JA_CADASTRADO);
 
         return Ok(response);
     }
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public async Task<IActionResult> Delete([FromRoute] int id,
-        [FromServices] IDeleteLogin services)
+    public async Task<IActionResult> DeleteUser(
+        [FromServices] ILoginServices services,
+        [FromRoute] int id)
     {
-        var response = await services.Execute(id);
+        var response = await services.DeleteUserLogin(id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceException.ERRO_USUARIO_NAO_ENCONTRADO_DELETE);
 
         return Ok(response);
     }

@@ -11,6 +11,7 @@ public class AutoMapping : Profile
     {
         RequestToEntity();
         EntityToResponse();
+        StringToResponse();
     }
 
     private void RequestToEntity()
@@ -22,6 +23,11 @@ public class AutoMapping : Profile
     private void EntityToResponse()
     {
         CreateMap<LoginUser, LoginResponse>();
+
+    }
+
+    private void StringToResponse()
+    {
         CreateMap<string, LoginResponse>()
             .ForMember(dest => dest.Token, opt => opt.MapFrom(src => src));
     }

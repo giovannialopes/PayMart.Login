@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PayMart.Application.Login.UseCases.Delete;
-using PayMart.Application.Login.UseCases.GetUser;
-using PayMart.Application.Login.UseCases.RegisterUser;
 using PayMart.Domain.Login.AutoMapper;
 
 namespace PayMart.Domain.Login.Services.AInjection;
@@ -21,8 +18,6 @@ public static class DependencyInjectionServices
 
     private static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<IGetUserLogin, GetUserLogin>();
-        services.AddScoped<IRegisterUserLogin, RegisterUserLogin>();
-        services.AddScoped<IDeleteLogin, DeleteLogin>();
+        services.AddScoped<ILoginServices, LoginServices>();
     }
 }
