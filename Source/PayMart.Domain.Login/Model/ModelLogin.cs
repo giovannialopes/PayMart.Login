@@ -8,18 +8,22 @@ public class ModelLogin
         public string PasswordHash { get; set; } = string.Empty;
     }
 
-    public class RegisterLoginRequest
-    {
-        public string Username { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string PasswordHash { get; set; } = string.Empty;
-    }
-
-
+    /// <summary>
+    /// -------
+    /// </summary>
 
     public class LoginResponse
     {
         public string Token { get; set; } = string.Empty;
+        public string Exception { get; set; } = string.Empty;
+
+    }
+
+    public class RegisterLoginResponse
+    {
+        public string ContactEmail { get; set; } = string.Empty;
+        public int UserId { get; set; }
+        public string Exception { get; set; } = string.Empty;
     }
 
 

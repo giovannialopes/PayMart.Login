@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PayMart.Domain.Login.Exceptions;
+using PayMart.Domain.Login.Http.Client;
 using PayMart.Domain.Login.ModelView;
 using PayMart.Domain.Login.Services;
 
@@ -26,13 +27,15 @@ public class LoginController : ControllerBase
     [Route("registerUser")]
     public async Task<IActionResult> RegisterUser(
         [FromServices] ILoginServices services,
-        [FromBody] ModelLogin.RegisterLoginRequest request)
+        [FromBody] ModelLogin.LoginRequest request)
     {
         var response = await services.RegisterUserLogin(request);
         if (response == null)
             return Ok(ResourceException.ERRO_EMAIL_JA_CADASTRADO);
 
-        return Ok(response);
+        await HttpClients.AddClient(response);
+
+        return Ok("Usuário Criado");
     }
 
     [HttpDelete]

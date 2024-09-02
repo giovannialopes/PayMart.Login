@@ -15,7 +15,6 @@ public class JwtAcessToken(uint expirationTimeToken, string signingKey) : IJwtTo
         var claims = new List<Claim>()
         {
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 

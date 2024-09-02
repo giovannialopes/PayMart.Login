@@ -1,10 +1,11 @@
-﻿using static PayMart.Domain.Login.ModelView.ModelLogin;
+﻿using PayMart.Domain.Login.ModelView;
+using static PayMart.Domain.Login.ModelView.ModelLogin;
 
 namespace PayMart.Domain.Login.Services;
 
 public interface ILoginServices
 {
-    Task<string?> RegisterUserLogin(RegisterLoginRequest request);
+    Task<ModelLogin.RegisterLoginResponse?> RegisterUserLogin(LoginRequest request);
 
     Task<LoginResponse?> GetUserLogin(LoginRequest request);
 

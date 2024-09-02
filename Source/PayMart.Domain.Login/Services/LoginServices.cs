@@ -13,7 +13,7 @@ public class LoginServices(ILoginRepository loginRepository,
     IJwtTokenGenerator jwtTokenGenerator,
     IMapper mapper) : ILoginServices
 {
-    public async Task<string?> RegisterUserLogin(ModelLogin.RegisterLoginRequest request)
+    public async Task<ModelLogin.RegisterLoginResponse?> RegisterUserLogin(ModelLogin.LoginRequest request)
     {
         if (request.Email.Contains("@") && !string.IsNullOrEmpty(request.Email))
         {
@@ -28,7 +28,14 @@ public class LoginServices(ILoginRepository loginRepository,
                 await loginRepository.Commit();
 
                 var userID = await loginRepository.GetUser(response.Email, response.PasswordHash);
-                return mapper.Map<string>("Usuário Criado");
+
+                var mapResponse = new ModelLogin.RegisterLoginResponse
+                {
+                    ContactEmail = userID!.Email,
+                    UserId = userID.Id,
+                };
+
+                return mapResponse;
             }
         }
         return default;

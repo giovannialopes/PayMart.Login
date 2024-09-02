@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayMart.Infrastructure.Login.DataAcess;
 
@@ -11,9 +12,11 @@ using PayMart.Infrastructure.Login.DataAcess;
 namespace PayMart.Infrastructure.Login.Migrations
 {
     [DbContext(typeof(DbLogin))]
-    partial class DbLoginModelSnapshot : ModelSnapshot
+    [Migration("20240901225702_RemoveUsarname")]
+    partial class RemoveUsarname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

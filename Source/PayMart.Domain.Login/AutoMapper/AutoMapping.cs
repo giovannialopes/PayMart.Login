@@ -16,13 +16,13 @@ public class AutoMapping : Profile
 
     private void RequestToEntity()
     {
-        CreateMap<RegisterLoginRequest, LoginUser>();
         CreateMap<LoginRequest, LoginUser>();
     }
 
     private void EntityToResponse()
     {
         CreateMap<LoginUser, LoginResponse>();
+        CreateMap<LoginUser, RegisterLoginResponse>();
 
     }
 
