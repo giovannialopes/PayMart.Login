@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{8DADE73B-2BB6-463A-A673-375A07144798}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8DADE73B-2BB6-463A-A673-375A07144798}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Login", "Source\PayMart.API.Login\PayMart.API.Login.csproj", "{1890A5C3-34F4-44DB-A18E-67B38F76093E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Login", "src\PayMart.API.Login\PayMart.API.Login.csproj", "{1890A5C3-34F4-44DB-A18E-67B38F76093E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Login", "Source\PayMart.Domain.Login\PayMart.Domain.Login.csproj", "{CBA10DF2-E9BA-47B3-A0D6-A28D1D274F21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Login", "src\PayMart.Domain.Login\PayMart.Domain.Login.csproj", "{CBA10DF2-E9BA-47B3-A0D6-A28D1D274F21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Login", "Source\PayMart.Infrastructure.Login\PayMart.Infrastructure.Login.csproj", "{6C0AED6F-F8E1-42DE-A033-DC846F7F8290}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Login", "src\PayMart.Infrastructure.Login\PayMart.Infrastructure.Login.csproj", "{6C0AED6F-F8E1-42DE-A033-DC846F7F8290}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2A5F5F71-497A-4FA8-981A-A258AD87CAE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
