@@ -1,7 +1,6 @@
 using PayMart.Domain.Login.Services.AInjection;
 using PayMart.Infrastructure.Login.Injection;
 using PayMart.Infrastructure.Login.Migrations;
-using PayMart.Infrastructure.Login.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -29,7 +29,6 @@ public static class DepedencyInjectionInfra
         services.AddScoped<IJwtTokenGenerator>(config => new JwtAcessToken(expirationToken, signingKey!));
     }
 
-
     private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<ILoginRepository, LoginRepository>();
